@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Todos</title>
+    <title>Blog</title>
 </head>
 <body>
 
@@ -12,11 +12,11 @@
 {% endif %}
 
 <ol>
-    {% for todo in todos %}
+    {% for blog_in in blogs %}
         <li>
-            <h1>{{ todo.name }}</h1>
-            <p>{{ todo.description }}</p>
-            {% for tag in todo.tags.all %}
+            <h1>{{ blog_in.name }}</h1>
+            <p>{{ blog_in.description }}</p>
+            {% for tag in blog_in.tags.all %}
                 {{ tag.name }}
             {% endfor  %}
         </li>
@@ -26,14 +26,7 @@
 
 <form method="POST">
     {% csrf_token %}
-    <input name="todo_name">
-    <input name="description_name">
-    <select name="tag_names" multiple>
-        {% for tag in tags %}
-            <option value="{{ tag.id }}" >{{ tag.name }}</option>
-        {% endfor %}
-    </select>
-
+        {{ form }}
     <button type="submit">Submit</button>
 </form>
 
