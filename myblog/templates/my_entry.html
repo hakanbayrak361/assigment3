@@ -7,29 +7,30 @@
 <body>
 
 {% if request.user.username %}
-    <h1>Welcome {{ request.user.username }}</h1>
-    <a href="/users/logout">Logout</a>
+    <h1>Welcome {{ request.user.username }}  <a href="/users/logout">Logout</a></h1>
 {% endif %}
 
 <ol>
-    {% for blog_in in blogs %}
+    {% for myblog in blogs %}
         <li>
-            <h1>{{ blog_in.name }}</h1>
-            <p>{{ blog_in.description }}</p>
-            {% for tag in blog_in.tags.all %}
-                {{ tag.name }}
+            <h1>{{ myblog.name }}</h1>
+            <p>{{ myblog.description }}</p>
+            {% for tag in myblog.tags.all %}
+                +{{ tag.name }}
             {% endfor  %}
+            <p>&nbsp;&nbsp;&nbsp; written by: {{ myblog.owner.username }}</p>
         </li>
     {% endfor %}
 </ol>
 
 
-<form method="POST">
-    {% csrf_token %}
+{% if form %}
+    <form method="POST">
+        {% csrf_token %}
         {{ form }}
-    <button type="submit">Submit</button>
-</form>
-
+        <button type="submit">Submit</button>
+    </form>
+{% endif %}
 
 </body>
 </html>
